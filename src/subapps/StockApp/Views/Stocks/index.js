@@ -58,6 +58,7 @@ var ViewReactClass = React.createClass({
     StockActions.updateStocks();
   },
 
+  //TIP: underscore '_' as leading name for function name is means private methond (came from PHP code convention)
   _genRows: function(watchlist: Array<Object>, result: Array<Object>) {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(watchlist),
@@ -367,8 +368,8 @@ var ViewReactClass = React.createClass({
   renderStockCell: function(stock: Object) {
     return (
       <StockCell
-        onSelect={() => this.selectStock(stock)}
-        stock={stock}/>
+        onSelect={() => this.selectStock(stock)} // this mothod was called by StockCell, to tell which stock is selected
+        stock={stock}/> // pass the stock data to StockCell
     );
   },
 
