@@ -17,15 +17,30 @@ class AppLab extends Component
 {
     constructor(props) {
         super(props);
+        this.state = {
+            subappname: null
+        }
         
     }
 
     render()
     {
-        return (
-            <StockApp />
-        )
-        /*
+        switch(this.state.subappname) {
+            case "StockApp":
+                return (
+                    <StockApp />
+                )
+                break;
+           
+            default:
+                return this._renderAppList();
+                
+                breack;
+        }
+        
+    }
+
+    _renderAppList() {
         return (
             <View style={styles.container}>
                 <Text style={styles.TitleText}>App list:</Text>
@@ -37,18 +52,20 @@ class AppLab extends Component
                 <TouchableHighlight 
                     onPress={this.onStockPressed.bind(this)}
                     style={styles.button}>
-                    <Text style={styles.buttonText}>Yahoo Stock App</Text>
+                    <Text style={styles.buttonText}>Stock App</Text>
                 </TouchableHighlight>
             </View>
-        )        */
+        )   
     }
 
     onTrackingPressed() {
         console.log('Tracking app button was pressed!');
+
     }
 
     onStockPressed() {
         console.log("Stock app button was pressed");
+        this.setState({subappname: 'StockApp'});   
     }
   
 }
