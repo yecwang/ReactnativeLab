@@ -11,7 +11,7 @@ var {
     Component,
 } = React;
 
-var Finance = require('../subapps/StockApp/index.js');
+var StockApp = require('../../subapps/StockApp/index.js');
 
 class AppLab extends Component
 {
@@ -23,7 +23,7 @@ class AppLab extends Component
     render()
     {
         return (
-            <Finance />
+            <StockApp />
         )
         /*
         return (

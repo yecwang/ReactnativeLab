@@ -1,15 +1,15 @@
 'use strict';
 
 var React = require('react-native');
-var Login = require('./Login');
-var AppLab = require('./AppLab');
+var Login = require('./views/Login');
+var AppLab = require('./views/AppLab');
 
 var {    
     Component,
 } = React;
 
 
-class Main extends Component {
+class ReactnativeLab extends Component {
 
     // TIP: in none es6, should use getInitialState() instead constuctor
     constructor(props) {
@@ -44,4 +44,4 @@ class Main extends Component {
 
 }
 
-module.exports = Main;
+module.exports = ReactnativeLab;
