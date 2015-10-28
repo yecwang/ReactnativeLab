@@ -11,15 +11,21 @@ var {
     Component,
 } = React;
 
+var Finance = require('../subapps/StockApp/index.js');
+
 class AppLab extends Component
 {
     constructor(props) {
         super(props);
-
+        
     }
 
     render()
     {
+        return (
+            <Finance />
+        )
+        /*
         return (
             <View style={styles.container}>
                 <Text style={styles.TitleText}>App list:</Text>
@@ -28,12 +34,21 @@ class AppLab extends Component
                     style={styles.button}>
                     <Text style={styles.buttonText}>Tracking App</Text>
                 </TouchableHighlight>
+                <TouchableHighlight 
+                    onPress={this.onStockPressed.bind(this)}
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>Yahoo Stock App</Text>
+                </TouchableHighlight>
             </View>
-        )        
+        )        */
     }
 
     onTrackingPressed() {
         console.log('Tracking app button was pressed!');
+    }
+
+    onStockPressed() {
+        console.log("Stock app button was pressed");
     }
   
 }
