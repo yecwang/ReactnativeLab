@@ -12,7 +12,7 @@ var {
   View,
 } = React;
 
-// TIP: Flux
+// Flux
 var PropertyActions = require('../../Utils/Property/actions');
 var PropertyStore = require('../../Utils/Property/store');
 var StockStore = require('../../Utils/Stock/store');

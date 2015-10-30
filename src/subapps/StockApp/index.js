@@ -17,6 +17,9 @@ var {
   BackAndroid,
 } = React;
 
+// Flux
+var StockActions = require('./Utils/Stock/actions');
+
 // Views
 var AddNewView = require('./Views/AddNew');
 var SettingsView = require('./Views/Settings');
@@ -53,8 +56,10 @@ var NavToolbar = React.createClass({
       <ToolbarAndroid
         style={styles.toolbar}
         onIconClicked={this.props.navigator.pop}
+        actions={this.props.actions}
+        onActionSelected={this.props.onActionSelected}
         titleColor='white'
-        title='FinanceReactNative' />
+        title='Finance' />
     )
   }
 })
@@ -94,7 +99,11 @@ var Finance = React.createClass({
     if (route.id === 'stocks') {
       return (
         <View style={styles.container}>
-          <NavToolbar navigator={navigator} route={route} />
+          <NavToolbar
+            navigator={navigator}
+            route={route}
+            actions={[{title: 'Reload', icon: require('image!ic_reload_white'), show: 'always'}]}
+            onActionSelected={() => StockActions.updateStocks()} />
           <StocksView navigator={navigator} route={route} />
         </View>
       );
@@ -115,7 +124,7 @@ var Finance = React.createClass({
     if (route.id === 'add') {
       return (
         <View style={styles.container}>
-          <NavToolbar navIcon={true} navigator={navigator} route={route} />
+          <NavToolbar navigator={navigator} route={route} />
           <AddNewView navigator={navigator} route={route} />
         </View>
       )

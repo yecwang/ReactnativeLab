@@ -1,6 +1,5 @@
 /* @flow */
 exports.dynamicSort = function(property: string) : Function {
-  //TIP: this is flow see keywords above to avoid coder make mistake, so allow to use "property: string".
   var sortOrder = 1;
   if (property[0] === '-') {
     sortOrder = -1;

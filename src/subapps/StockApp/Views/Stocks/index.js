@@ -8,10 +8,12 @@ var {
   Image,
   ListView,
   Platform,
+  Platform,
   Text,
   ToastAndroid,
   TouchableHighlight,
   View,
+  ViewPagerAndroid,
 } = React;
 
 // 3rd Elements
@@ -45,7 +47,6 @@ var ViewReactClass = React.createClass({
     return {
       dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
       loaded: false,
-      middleBlockShowing: 'DETAILS',
       chartTimeSpan: '1D',
       dataSourcePage: viewPagerDataSource.cloneWithPages(['DETAILS', 'CHARTS', 'NEWS']),
     };
@@ -58,7 +59,6 @@ var ViewReactClass = React.createClass({
     StockActions.updateStocks();
   },
 
-  //TIP: underscore '_' as leading name for function name is means private methond (came from PHP code convention)
   _genRows: function(watchlist: Array<Object>, result: Array<Object>) {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(watchlist),
@@ -83,6 +83,29 @@ var ViewReactClass = React.createClass({
     );
   },
 
+  renderViewPagerAndroid: function() {
+    return (
+      <ViewPagerAndroid
+        style={{flex: 1}}
+        initialPage={0}>
+        {this.renderDetails()}
+        {this.renderCharts()}
+        {this.renderNews()}
+      </ViewPagerAndroid>
+    );
+  },
+
+  renderViewPagerIOS: function() {
+    return (
+      <ViewPager
+        dataSource={this.state.dataSourcePage}
+        renderPage={this._renderPage}
+        onChangePage={this._onChangePage}
+        isLoop={true}
+        autoPlay={false} />
+    );
+  },
+
   renderListView: function() {
     return(
       <View style={styles.container}>
@@ -94,12 +117,13 @@ var ViewReactClass = React.createClass({
             style={styles.stocksListView} />
         </View>
         <View style={styles.middleBlock}>
-          <ViewPager
-            dataSource={this.state.dataSourcePage}
-            renderPage={this._renderPage}
-            onChangePage={this._onChangePage}
-            isLoop={true}
-            autoPlay={false} />
+          {(() => {
+            switch (Platform.OS) {
+              case 'ios':                   return this.renderViewPagerIOS();
+              case 'android':               return this.renderViewPagerAndroid();
+              default:                      return this.renderViewPagerIOS();
+            }
+          })()}
         </View>
         <View style={styles.footerBlock}>
           <TouchableHighlight
@@ -119,9 +143,7 @@ var ViewReactClass = React.createClass({
               style={styles.settings}
               onPress={() => this.pushSettingsView()}
               underlayColor='#202020'>
-            <Text style={styles.settingsText}>
-              ☰
-            </Text>
+              <Image style={styles.icon} source={require('image!ic_three_lines_white')} />
           </TouchableHighlight>
         </View>
       </View>
@@ -368,8 +390,8 @@ var ViewReactClass = React.createClass({
   renderStockCell: function(stock: Object) {
     return (
       <StockCell
-        onSelect={() => this.selectStock(stock)} // this mothod was called by StockCell, to tell which stock is selected
-        stock={stock}/> // pass the stock data to StockCell
+        onSelect={() => this.selectStock(stock)}
+        stock={stock}/>
     );
   },
 
