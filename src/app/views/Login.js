@@ -52,7 +52,7 @@ class Login extends Component
         return (
 
             <View style={styles.container}>
-               <Image style={styles.logo} source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}/>
+             {/* TIP: how to comment out JSX  <Image style={styles.logo} source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}/> */}
                 <Text style={styles.heading}>Yuhan Playground</Text>
                 <TextInput 
                     onChangeText={(text) => this.setState({username: text})}
@@ -150,12 +150,12 @@ var styles = React.StyleSheet.create({
     },
     error: {
         color: 'red',
-        paddingTop: 10,
+        marginTop: 10,
         fontSize: 20,
     },
     indicator:{
         color: '#48BBEC',
-        marginTop: 20,
+        marginTop: 10,
         fontSize: 20,
     }
 });
