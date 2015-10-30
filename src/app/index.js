@@ -41,7 +41,6 @@ class ReactnativeLab extends Component {
     onLogin() {
         this.setState({isLoggedIn: true});
     }
-
 }
 
 module.exports = ReactnativeLab;

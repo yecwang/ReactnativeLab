@@ -6,7 +6,7 @@ class AuthService
 {
 	login(user, cb)
 	{
-		var remoteService = new RemoteService();
+		/*var remoteService = new RemoteService();
 
 		//TIP: demostrate how to use static member.
 		console.log(RemoteService.DATABASE_URL);
@@ -14,7 +14,7 @@ class AuthService
 		remoteService.getAuth((err, userValue)=>  {
 			if (err) {
 				console.log(err);
-				cb(err, {sucess: false});
+				cb(err, {success: false});
 			}
 			else {
 				console.log(userValue);
@@ -33,38 +33,29 @@ class AuthService
 				
 			}
 
-			cb('Unknow error', {sucess: false});
+			cb('Unknow error', {success: false});
 
-		});
+		});*/
 
-		/*
+		// for testing
 		setTimeout(() => {
 			if (user)
 			{
 				var username = user.username;
 				var password = user.password;
-				
-				var remoteService = new RemoteService();
-				remoteService.getAuth((err, user)=>  {
-					if (err)
-						console.log(err);
-						return; // TODO: do something here
-					}
-					else {
-						console.log(user);
-					}
-
-				});
-
-				if (username === 'yuhan' && password === 'yuhan') ß{
-					cb ({success: true});
+			
+				if ((username === 'yuhan' && password === 'yuhan')
+					|| (username === 'fei' && password === 'fei')
+					|| (username === 'y' && password === 'y')
+					) {
+					cb (null, {success: true});
 					return;
 				}
 			}
 
-			cb({sucess: false});
+			cb('Wrong user', {success: false});
 
-		}, 2000);	*/	
+		}, 1000);	
 	}
 }
 

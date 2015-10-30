@@ -18,14 +18,16 @@ class AppLab extends Component
     constructor(props) {
         super(props);
         this.state = {
-            subappname: null
+            subAppName: null
         }
-        
+
     }
 
     render()
     {
-        switch(this.state.subappname) {
+
+        switch(this.state.subAppName) {
+
             case "StockApp":
                 return (
                     <StockApp />
@@ -65,7 +67,7 @@ class AppLab extends Component
 
     onStockPressed() {
         console.log("Stock app button was pressed");
-        this.setState({subappname: 'StockApp'});   
+        this.setState({subAppName: 'StockApp'});   
     }
   
 }
@@ -98,7 +100,6 @@ var styles = React.StyleSheet.create({
         color: 'black',
         fontSize: 24
     },
-   
 });
 
 module.exports = AppLab;

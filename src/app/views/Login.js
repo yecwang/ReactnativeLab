@@ -9,7 +9,8 @@ var {
     TextInput,
     TouchableHighlight,
     Component,
-    ActivityIndicatorIOS
+    ActivityIndicatorIOS,
+    Platform
 } = React;
 
 class Login extends Component
@@ -28,10 +29,24 @@ class Login extends Component
     render()
     {
         var errorView = <View />;
-        if (this.state.success === false) {
+        if (this.state.success === false && this.state.showProgress === false) {
             errorView = <Text style={styles.error}>
                 Wrong username and password!
             </Text>;
+        }
+
+        var indicatorView = <View />;
+        if (Platform.OS === 'ios') {
+            indicatorView = <ActivityIndicatorIOS
+                                animating={this.state.showProgress}
+                                style={styles.loader}
+                                size="large" />;
+        } else {
+            if (this.state.showProgress === true) {
+                indicatorView = <Text style={styles.indicator}>
+                                    Verifying.........
+                                 </Text>;
+            }
         }
 
         return (
@@ -54,10 +69,8 @@ class Login extends Component
                     <Text style={styles.buttonText}>Log in</Text>
                 </TouchableHighlight>
                 {errorView }
-                <ActivityIndicatorIOS
-                    animating={this.state.showProgress}
-                    style={styles.loader}
-                    size="large" />
+                {indicatorView }
+              
                 
             </View>
         );
@@ -138,6 +151,11 @@ var styles = React.StyleSheet.create({
     error: {
         color: 'red',
         paddingTop: 10,
+        fontSize: 20,
+    },
+    indicator:{
+        color: '#48BBEC',
+        marginTop: 20,
         fontSize: 20,
     }
 });
