@@ -12,7 +12,7 @@ var {
 } = React;
 
 var StockApp = require('../../subapps/StockApp/index.js');
-
+var TryRedux = require('../../subapps/TryRedux/app/containers/app')
 class AppLab extends Component
 {
     constructor(props) {
@@ -33,7 +33,11 @@ class AppLab extends Component
                     <StockApp />
                 )
                 break;
-           
+           case "TryRedux":
+                return (
+                    <TryRedux />
+                )
+                break;
             default:
                 return this._renderAppList();
                 
@@ -56,6 +60,11 @@ class AppLab extends Component
                     style={styles.button}>
                     <Text style={styles.buttonText}>Stock App</Text>
                 </TouchableHighlight>
+                 <TouchableHighlight 
+                    onPress={this.onReduxPressed.bind(this)}
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>Try redux</Text>
+                </TouchableHighlight>
             </View>
         )   
     }
@@ -63,6 +72,11 @@ class AppLab extends Component
     onTrackingPressed() {
         console.log('Tracking app button was pressed!');
 
+    }
+
+    onReduxPressed() {
+        this.setState({subAppName: 'TryRedux'});   
+        console.log("try redux button pressed");
     }
 
     onStockPressed() {
